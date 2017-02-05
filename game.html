@@ -1,0 +1,55 @@
+<html>
+<head>
+    <style>
+        canvas {
+            border: 1px solid #d3d3d3;
+            background-color: #f1f1f1;
+        }
+    </style>
+
+    <script>
+
+        var gamePuck;
+
+        function startGame(width, height, interval) {
+            gamePuck = new puck(30, 30, "red", 10, 120);
+            pitch.start(width, height, interval);
+        }
+
+        var pitch = {
+            canvas: document.createElement("canvas"),
+            start: function (w,h,i) {
+                this.canvas.width = w;
+                this.canvas.height = h;
+                this.context = this.canvas.getContext("2d");
+                document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+                this.interval = setInterval(updateGameArea, i);
+            },
+            clear: function () {
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+        }
+
+        function puck(width, height, color, x, y) {
+            this.width = width;
+            this.height = height;
+            this.x = x;
+            this.y = y;
+            this.update = function () {
+                ctx = pitch.context;
+                ctx.fillStyle = color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            }
+        }
+
+        function updateGameArea() {
+            pitch.clear();
+            gamePuck.update();
+        }
+    </script>
+</head>
+<body onload="startGame(800, 400, 20)">
+
+
+</body>
+</html>
