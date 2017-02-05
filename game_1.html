@@ -1,40 +1,10 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <style>
-        canvas {
-            border: 1px solid #d3d3d3;
-            background-color: #f1f1f1;
-        }
-    </style>
-
-    <script>
-
-        function startGame(width, height, interval) {
-            pitch.start(width, height, interval);
-        }
-
-        var pitch = {
-            canvas: document.createElement("canvas"),
-            start: function (w,h,i) {
-                this.canvas.width = w;
-                this.canvas.height = h;
-                this.context = this.canvas.getContext("2d");
-                document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-                this.interval = setInterval(updatePitch, i);
-            },
-            clear: function () {
-                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-            }
-        };
-
-        function updatePitch() {
-            pitch.clear();
-        }
-
-    </script>
+    <meta charset="UTF-8">
+    <title>$Title$</title>
 </head>
-<body onload="startGame(800, 400, 20)">
-
-
+<body>
+$END$
 </body>
 </html>

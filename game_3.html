@@ -9,7 +9,10 @@
 
     <script>
 
+       var gamePuck;
+
         function startGame(width, height, interval) {
+            gamePuck = new puck(30, 30, "red", 10, 120);
             pitch.start(width, height, interval);
         }
 
@@ -25,12 +28,24 @@
             clear: function () {
                 this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
             }
-        };
+        }
+
+        function puck(width, height, color, x, y) {
+            this.width = width;
+            this.height = height;
+            this.x = x;
+            this.y = y;
+            this.update = function () {
+                ctx = pitch.context;
+                ctx.fillStyle = color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+            }
+        }
 
         function updatePitch() {
             pitch.clear();
+            gamePuck.update();
         }
-
     </script>
 </head>
 <body onload="startGame(800, 400, 20)">
