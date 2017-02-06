@@ -7,19 +7,20 @@
         }
     </style>
     <script>
+        const interval = 20;
 
-        function startGame(width, height, interval) {
-            pitch.start(width, height, interval);
+        function startGame(width, height) {
+            pitch.start(width, height);
         }
 
         var pitch = {
             canvas: document.createElement("canvas"),
-            start: function (w,h,i) {
+            start: function (w,h) {
                 this.canvas.width = w;
                 this.canvas.height = h;
                 this.context = this.canvas.getContext("2d");
                 document.body.insertBefore(this.canvas, document.body.childNodes[0]);
-                this.interval = setInterval(updatePitch, i);
+                this.interval = setInterval(updatePitch, interval);
             },
             clear: function () {
                 this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
@@ -32,6 +33,6 @@
 
     </script>
 </head>
-<body onload="startGame(800, 400, 20)">
+<body onload="startGame(800, 400)">
 </body>
 </html>
