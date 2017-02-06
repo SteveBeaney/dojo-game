@@ -34,10 +34,20 @@
             this.height = height;
             this.x = x;
             this.y = y;
+            this.x_velocity = 1;
+            this.y_velocity = 1;
             this.update = function () {
                 ctx = pitch.context;
                 ctx.fillStyle = color;
                 ctx.fillRect(this.x, this.y, this.width, this.height);
+                if( this.y >= (pitch.canvas.height-this.height)  || this.y <= 0 ) {                     //new
+                    this.y_velocity = -this.y_velocity;
+                }
+                if( this.x >= (pitch.canvas.width-this.width)  || this.x <= 0 ) {                       //new
+                    this.x_velocity = -this.x_velocity;
+                }
+                this.x += this.x_velocity;
+                this.y += this.y_velocity;
             }
         }
 
