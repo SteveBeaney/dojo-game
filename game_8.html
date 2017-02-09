@@ -18,11 +18,18 @@
 
         var pitch = {
             canvas: document.createElement("canvas"),
-            start: function (w,h) {
+            start: function (w, h) {
                 this.canvas.width = w;
                 this.canvas.height = h;
                 this.context = this.canvas.getContext("2d");
                 document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+                window.addEventListener('keydown', function (e) {
+                    pitch.key = e.keyCode;
+                })
+                window.addEventListener('keyup', function (e) {
+                    pitch.key = false;
+                })
+
                 setInterval(updatePitch, interval);
             },
             clear: function () {
@@ -41,10 +48,10 @@
                 var ctx = pitch.context;
                 ctx.fillStyle = color;
                 ctx.fillRect(this.x, this.y, this.width, this.height);
-                if( this.y >= (pitch.canvas.height-this.height)  || this.y <= 0 ) {
+                if (this.y >= (pitch.canvas.height - this.height) || this.y <= 0) {
                     this.y_velocity = -this.y_velocity;
                 }
-                if( this.x >= (pitch.canvas.width-this.width)  || this.x <= 0 ) {
+                if (this.x >= (pitch.canvas.width - this.width) || this.x <= 0) {
                     this.x_velocity = -this.x_velocity;
                 }
                 this.x += this.x_velocity;
@@ -57,20 +64,19 @@
             this.height = height;
             this.x = x;
             this.y = y;
-            this.y_velocity = 1;
+            this.y_velocity = 4;
             this.update = function () {
                 var ctx = pitch.context;
                 ctx.fillStyle = color;
                 ctx.fillRect(this.x, this.y, this.width, this.height);
-                if( this.y >= (pitch.canvas.height-this.height)  || this.y <= 0 ) {                     //new
-                    this.y_velocity = -this.y_velocity;
+                if (pitch.key && pitch.key == 38 && this.y > 0) {
+                    this.y -= this.y_velocity;
                 }
-                this.y += this.y_velocity;
+                if (pitch.key && pitch.key == 40 && this.y < (pitch.canvas.height - this.height)) {
+                    this.y += this.y_velocity;
+                }
             }
         }
-
-
-
 
         function updatePitch() {
             pitch.clear();
