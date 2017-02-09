@@ -1,0 +1,97 @@
+<html>
+<head>
+    <style>
+        canvas {
+            border: 1px solid #d3d3d3;
+            background-color: #f1f1f1;
+        }
+    </style>
+    <script>
+        const interval = 20;
+        var gamePuck;
+
+        function startGame(width, height) {
+            gamePuck = new Puck(30, 30, "red", 100, 120);
+            gameBat = new Bat(10, 100, "green", 0, 80);
+            pitch.start(width, height);
+        }
+
+        var pitch = {
+            canvas: document.createElement("canvas"),
+            start: function (w, h) {
+                this.canvas.width = w;
+                this.canvas.height = h;
+                this.context = this.canvas.getContext("2d");
+                document.body.insertBefore(this.canvas, document.body.childNodes[0]);
+                window.addEventListener('keydown', function (e) {
+                    pitch.key = e.keyCode;
+                });
+                window.addEventListener('keyup', function () {
+                    pitch.key = false;
+                });
+
+                setInterval(updatePitch, interval);
+            },
+            clear: function () {
+                this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+            }
+        };
+
+        function Puck(width, height, color, x, y) {
+            this.width = width;
+            this.height = height;
+            this.x = x;
+            this.y = y;
+            this.x_velocity = 4;
+            this.y_velocity = 2;
+            this.update = function () {
+                var ctx = pitch.context;
+                ctx.fillStyle = color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+                if (this.y >= (pitch.canvas.height - this.height) || this.y <= 0) {
+                    this.y_velocity = -this.y_velocity;
+                }
+                if (this.x >= (pitch.canvas.width - this.width ) ) {
+                    this.x_velocity = -this.x_velocity;
+                }
+                if (this.x <= gameBat.width && this.y+this.height >gameBat.y && this.y < gameBat.y+gameBat.height) {
+                    this.x_velocity = -this.x_velocity;
+                }
+                if(this.x < 0){
+                    this.x=2;
+
+                }
+                this.x += this.x_velocity;
+                this.y += this.y_velocity;
+            }
+        }
+
+        function Bat(width, height, color, x, y) {
+            this.width = width;
+            this.height = height;
+            this.x = x;
+            this.y = y;
+            this.y_velocity = 4;
+            this.update = function () {
+                var ctx = pitch.context;
+                ctx.fillStyle = color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+                if (pitch.key && pitch.key == 38 && this.y > 0) {
+                    this.y -= this.y_velocity;
+                }
+                if (pitch.key && pitch.key == 40 && this.y < (pitch.canvas.height - this.height)) {
+                    this.y += this.y_velocity;
+                }
+            }
+        }
+
+        function updatePitch() {
+            pitch.clear();
+            gamePuck.update();
+            gameBat.update();
+        }
+    </script>
+</head>
+<body onload="startGame(800, 400)">
+</body>
+</html>
