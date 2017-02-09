@@ -12,6 +12,7 @@
 
         function startGame(width, height) {
             gamePuck = new Puck(30, 30, "red", 10, 120);
+            gameBat = new Bat(10, 100, "green", 0, 80);
             pitch.start(width, height);
         }
 
@@ -34,7 +35,28 @@
             this.height = height;
             this.x = x;
             this.y = y;
-            this.x_velocity = 1;
+            this.x_velocity = 4;
+            this.y_velocity = 2;
+            this.update = function () {
+                var ctx = pitch.context;
+                ctx.fillStyle = color;
+                ctx.fillRect(this.x, this.y, this.width, this.height);
+                if( this.y >= (pitch.canvas.height-this.height)  || this.y <= 0 ) {
+                    this.y_velocity = -this.y_velocity;
+                }
+                if( this.x >= (pitch.canvas.width-this.width)  || this.x <= 0 ) {
+                    this.x_velocity = -this.x_velocity;
+                }
+                this.x += this.x_velocity;
+                this.y += this.y_velocity;
+            }
+        }
+
+        function Bat(width, height, color, x, y) {
+            this.width = width;
+            this.height = height;
+            this.x = x;
+            this.y = y;
             this.y_velocity = 1;
             this.update = function () {
                 var ctx = pitch.context;
@@ -43,17 +65,17 @@
                 if( this.y >= (pitch.canvas.height-this.height)  || this.y <= 0 ) {                     //new
                     this.y_velocity = -this.y_velocity;
                 }
-                if( this.x >= (pitch.canvas.width-this.width)  || this.x <= 0 ) {                       //new
-                    this.x_velocity = -this.x_velocity;
-                }
-                this.x += this.x_velocity;
                 this.y += this.y_velocity;
             }
         }
-        
+
+
+
+
         function updatePitch() {
             pitch.clear();
             gamePuck.update();
+            gameBat.update();
         }
     </script>
 </head>
