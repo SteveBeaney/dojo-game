@@ -9,8 +9,11 @@
     <script>
         const interval = 20;
         var gamePuck;
+        var scoreHit = 0;
+        var scoreNet = 0;
 
         function startGame(width, height) {
+            gameScore = new Text(90, 90, "black", width - 50, 15);
             gamePuck = new Puck(30, 30, "red", 100, 120);
             gameBat = new Bat(10, 100, "green", 0, 80);
             pitch.start(width, height);
@@ -29,13 +32,28 @@
                 window.addEventListener('keyup', function () {
                     pitch.key = false;
                 });
-
                 setInterval(updatePitch, interval);
             },
             clear: function () {
                 this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
             }
         };
+
+        function Text(width, height, color, x, y) {
+            this.width = width;
+            this.height = height;
+            this.x = x;
+            this.y = y;
+            this.text = "fred";
+            this.update = function () {
+                var ctx = pitch.context;
+                ctx.font = this.width + " " + this.height;
+                ctx.fillStyle = color;
+                this.text = scoreHit + "  -  " + scoreNet;
+                ctx.fillText(this.text, this.x, this.y);
+
+            };
+        }
 
         function Puck(width, height, color, x, y) {
             this.width = width;
@@ -44,7 +62,7 @@
             this.y = y;
             this.x_velocity = 4;
             this.y_velocity = 2;
-             this.update = function () {
+            this.update = function () {
                 var ctx = pitch.context;
                 ctx.fillStyle = color;
                 ctx.fillRect(this.x, this.y, this.width, this.height);
@@ -59,10 +77,12 @@
                         this.x_velocity *= 1.2;
                         this.y_velocity *= 1.2;
                     }
+                    scoreHit++;
                     this.x_velocity = -this.x_velocity;
                 }
                 if(this.x < -100) {
                     this.reset();
+                    scoreNet++;
                 }
                 this.x += this.x_velocity;
                 this.y += this.y_velocity;
@@ -96,6 +116,7 @@
 
         function updatePitch() {
             pitch.clear();
+            gameScore.update();
             gamePuck.update();
             gameBat.update();
         }
