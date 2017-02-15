@@ -1,0 +1,25 @@
+
+<html>
+<body>
+
+<canvas id="myCanvas" width="800" height="800" style="border:1px solid #d3d3d3;">
+</canvas>
+
+<script>
+
+    var points = [[200,400],
+                  [400,200],
+                  [600,400]];
+
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    ctx.moveTo(points[0][0],points[0][1]);
+    for( var i = 1; i < points.length; i++ ) {
+        ctx.lineTo(points[i][0], points[i][1]);
+        ctx.stroke();
+    }
+
+</script>
+
+</body>
+</html>
