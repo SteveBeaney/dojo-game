@@ -8,7 +8,7 @@
 
     function transform(o, p) {
         var r = [];
-        var theta = Math.PI / 4.0;
+        var theta = -Math.PI / 4.0;
         r[0] = Math.cos(theta) * (p[0] - o[0]) / Math.sqrt(2) - Math.sin(theta) * (p[1] - o[1]) / Math.sqrt(2) + o[0];
         r[1] = Math.sin(theta) * (p[0] - o[0]) / Math.sqrt(2) + Math.cos(theta) * (p[1] - o[1]) / Math.sqrt(2) + o[1];
         return r;
@@ -25,19 +25,21 @@
     }
 
     var points = [[200, 400],
-        [600, 400]];
+                  [600, 400]];
 
-    for (var k = 0; k < 7; k++) {
+    for (var k = 0; k < 17; k++) {
         points = generate(points);
     }
 
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
+    ctx.strokeStyle="#FF0000";
+
     ctx.moveTo(points[0][0], points[0][1]);
     for (var i = 1; i < points.length; i++) {
         ctx.lineTo(points[i][0], points[i][1]);
-        ctx.stroke();
     }
+    ctx.stroke();
 
 </script>
 
