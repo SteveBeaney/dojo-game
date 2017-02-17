@@ -8,9 +8,8 @@
 
     function transform(o, p) {
         var r = [];
-        var theta = -Math.PI / 4.0;
-        r[0] = Math.cos(theta) * (p[0] - o[0]) / Math.sqrt(2) - Math.sin(theta) * (p[1] - o[1]) / Math.sqrt(2) + o[0];
-        r[1] = Math.sin(theta) * (p[0] - o[0]) / Math.sqrt(2) + Math.cos(theta) * (p[1] - o[1]) / Math.sqrt(2) + o[1];
+        r[0] = 0;
+        r[1] = 0;
         return r;
     }
 
