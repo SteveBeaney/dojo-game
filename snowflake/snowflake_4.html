@@ -6,19 +6,11 @@
 
 <script>
 
-    function transform(o, p) {
-        var r = [];
-        var theta = -Math.PI / 4.0;
-        r[0] = Math.cos(theta) * (p[0] - o[0]) / Math.sqrt(2) - Math.sin(theta) * (p[1] - o[1]) / Math.sqrt(2) + o[0];
-        r[1] = Math.sin(theta) * (p[0] - o[0]) / Math.sqrt(2) + Math.cos(theta) * (p[1] - o[1]) / Math.sqrt(2) + o[1];
-        return r;
-    }
 
     function generate(points) {
         var result = [];
         result.push(points[0]);
         for (var i = 1; i < points.length; i++) {
-            result.push(transform(points[i - 1], points[i]));
             result.push(points[i]);
         }
         return result;
@@ -33,7 +25,7 @@
 
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
-    ctx.strokeStyle="#277aff";
+    ctx.strokeStyle="#fff11f";
 
     ctx.moveTo(points[0][0], points[0][1]);
     for (var i = 1; i < points.length; i++) {
