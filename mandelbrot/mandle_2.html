@@ -1,0 +1,66 @@
+
+<html>
+<body>
+
+<canvas id="myCanvas" width="800" height="800" style="border:1px solid #d3d3d3;">
+</canvas>
+
+<script>
+
+    function setPoint( imgd, x, y, color ){
+        var pix = imgd.data;
+        var p = (xr * y + x) * 4;
+        pix[p]=color[0];
+        pix[p+1]=color[1];
+        pix[p+2]=color[2];
+        pix[p+3]=color[3];
+    }
+
+    function mand( z, c ){
+        var result = [];
+        result[0] = z[0]*z[0]-z[1]*z[1]+c[0];
+        result[1] = 2*z[0]*z[1]+c[1];
+        return result;
+    }
+
+    function mandlebrot( c, limit ){
+        var count = 0;
+        z = [0,0];
+        while( count < limit && Math.sqrt( z[0]*z[0] + z[1]*z[1]) < 2 ){
+            z = mand( z, c );
+            count++;
+        }
+
+
+
+
+        return [ count, count, count, 255 ];
+    }
+
+    var canvas = document.getElementById("myCanvas");
+    var context = canvas.getContext("2d");
+    var xr = context.canvas.width;
+    var yr = context.canvas.height;
+    var imgd = context.createImageData(xr, yr);
+    var origin_x = -2.0;
+    var origin_y = -1.4;
+    var width_x = 2.8;
+    var width_y = 2.8;
+    var limit = 255;
+
+    for( var x = 0; x < xr; x++ ){
+        for( var y = 0; y < yr; y++ ){
+            var c = [ origin_x + x * width_x / xr, origin_y + y * width_y / yr ];
+
+            setPoint( imgd, x, y, mandlebrot(c,limit) );
+        }
+    }
+
+    context.putImageData(imgd, 0, 0);
+
+
+
+</script>
+
+</body>
+</html>
