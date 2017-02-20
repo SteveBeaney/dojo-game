@@ -1,6 +1,6 @@
 
 <html>
-<body>
+<body bgcolor="black">
 
 <canvas id="myCanvas" width="800" height="800" style="border:1px solid #d3d3d3;">
 </canvas>
@@ -30,15 +30,12 @@
             z = mand( z, c );
             count++;
         }
-        return [ count/4, count/4, count/4, 255 ];
-
+        count = count % 255;
+        return [count,count,count,255];
         if( count/2 == Math.floor(count/2)){
-            return [ 0, 0, 0, 255 ];
-
+            return [ 255, 255, 255, 255 ];
         }
-        return [ 255, 255, 255, 255 ];
-
-
+        return [ 0, 0, 0, 255 ];
     }
 
     var canvas = document.getElementById("myCanvas");
@@ -46,14 +43,11 @@
     var xr = context.canvas.width;
     var yr = context.canvas.height;
     var imgd = context.createImageData(xr, yr);
-//    var origin_x = -2.0;
-//    var origin_y = -1.4;
-//    var width_x = 2.8;
-//    var width_y = 2.8;
-    var origin_x = -0.78522;
-    var origin_y = -0.1325;
-    var width_x = 0.01;
-    var width_y = 0.01;
+
+    var origin_x = -0.78513;
+    var origin_y = -0.13213;
+    var width_x = 0.00005;
+    var width_y = 0.00005;
     var limit = 1024;
 
     for( var x = 0; x < xr; x++ ){

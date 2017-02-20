@@ -26,15 +26,14 @@
     function mandlebrot( c, limit ){
         var count = 0;
         z = [0,0];
-        while( count < limit && Math.sqrt( z[0]*z[0] + z[1]*z[1]) < 2 ){
-            z = mand( z, c );
+        while( count < limit && Math.sqrt( z[0]*z[0] + z[1]*z[1]) < 2 ) {
+            z = mand(z, c);
             count++;
         }
-
-
-
-
-        return [ count, count, count, 255 ];
+        if( count/2 == Math.floor(count/2)){
+            return [ 255, 255, 255, 255 ];
+        }
+        return [ 0, 0, 0, 255 ];
     }
 
     var canvas = document.getElementById("myCanvas");
@@ -43,15 +42,15 @@
     var yr = context.canvas.height;
     var imgd = context.createImageData(xr, yr);
     var origin_x = -2.0;
-    var origin_y = -1.4;
-    var width_x = 2.8;
-    var width_y = 2.8;
-    var limit = 255;
+    var origin_y = -2;
+    var width_x = 4;
+    var width_y = 4;
+    var limit = 128;
+
 
     for( var x = 0; x < xr; x++ ){
         for( var y = 0; y < yr; y++ ){
             var c = [ origin_x + x * width_x / xr, origin_y + y * width_y / yr ];
-
             setPoint( imgd, x, y, mandlebrot(c,limit) );
         }
     }
