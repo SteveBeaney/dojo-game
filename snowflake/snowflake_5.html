@@ -6,6 +6,8 @@
 
 <script>
 
+    var points = [[200, 400], [600, 400]];
+
     function transform(o, p) {
         var r = [];
         r[0] = 0;
@@ -23,16 +25,13 @@
         return result;
     }
 
-    var points = [[200, 400],
-                  [600, 400]];
-
     for (var k = 0; k < 17; k++) {
         points = generate(points);
     }
 
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
-    ctx.strokeStyle="#277aff";
+    ctx.strokeStyle="#0000ff";
 
     ctx.moveTo(points[0][0], points[0][1]);
     for (var i = 1; i < points.length; i++) {

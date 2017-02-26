@@ -6,6 +6,9 @@
 
 <script>
 
+    var points = [[200, 400], [600, 400]];
+    var turns = 16;
+
     function transform(o, p) {
         var r = [];
         var theta = -Math.PI / 4.0;
@@ -24,16 +27,13 @@
         return result;
     }
 
-    var points = [[200, 400],
-                  [600, 400]];
-
-    for (var k = 0; k < 17; k++) {
+    for (var k = 0; k < turns; k++) {
         points = generate(points);
     }
 
     var canvas = document.getElementById("myCanvas");
     var ctx = canvas.getContext("2d");
-    ctx.strokeStyle="#afff08";
+    ctx.strokeStyle="#0000ff";
 
     ctx.moveTo(points[0][0], points[0][1]);
     for (var i = 1; i < points.length; i++) {
