@@ -7,13 +7,13 @@
 
 <script>
 
-    var points = [[200,400], [600,400]];
+    var points = [[200,400], [600,400]];                    // defines the two ends of a line
 
-    var canvas = document.getElementById("myCanvas");
+    var canvas = document.getElementById("myCanvas");       // set up a canvas to draw on
     var ctx = canvas.getContext("2d");
     ctx.strokeStyle="#0000ff";
 
-    ctx.moveTo(points[0][0],points[0][1]);
+    ctx.moveTo(points[0][0],points[0][1]);                  // draw line
     ctx.lineTo(points[1][0],points[1][1]);
     ctx.stroke();
 

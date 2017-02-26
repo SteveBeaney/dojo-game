@@ -6,34 +6,35 @@
 
 <script>
 
-    var points = [[200, 400], [600, 400]];
+    var points = [[200, 400], [600, 400]];                  // defines the two ends of a line
+    var turns = 1;                                          // defines how many times we will transform the line
 
-    function transform(o, p) {
+    function transform(o, p) {                              // calculate an extra point for the line
         var r = [];
         r[0] = 0;
         r[1] = 0;
         return r;
     }
 
-    function generate(points) {
+    function generate(points) {                             // loops through the point of the line
         var result = [];
         result.push(points[0]);
         for (var i = 1; i < points.length; i++) {
-            result.push(transform(points[i - 1], points[i]));
+            result.push(transform(points[i - 1], points[i]));   // add a point for each line pair
             result.push(points[i]);
         }
         return result;
     }
 
-    for (var k = 0; k < 17; k++) {
+    for (var k = 0; k < turns; k++) {                       // add extra points to line
         points = generate(points);
     }
 
-    var canvas = document.getElementById("myCanvas");
+    var canvas = document.getElementById("myCanvas");       // set up a canvas to draw on
     var ctx = canvas.getContext("2d");
     ctx.strokeStyle="#0000ff";
 
-    ctx.moveTo(points[0][0], points[0][1]);
+    ctx.moveTo(points[0][0], points[0][1]);                 // draw the multi element line in a loop
     for (var i = 1; i < points.length; i++) {
         ctx.lineTo(points[i][0], points[i][1]);
     }
