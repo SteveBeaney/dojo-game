@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <script>
+
+        var messages = [
+            "No",
+            "There is always tomorrow",
+            "Everyting is better with chocolate",
+//            "It is certain",
+//            "It is decidedly so",
+//            "Without a doubt",
+//            "Yes definitely",
+//            "You may rely on it",
+//            "As I see it, yes",
+//            "Most likely",
+//            "Outlook good",
+//            "Yes",
+//            "Signs point to yes",
+//            "Reply hazy try again",
+//            "Ask again later",
+//            "Better not tell you now",
+//            "Cannot predict now",
+//            "Concentrate and ask again",
+//            "Don't count on it",
+//            "My reply is no",
+//            "My sources say no",
+            "Outlook not so good",
+            "Very doubtful"
+        ];
+        
+        function newMessage8() {
+            var i = Math.floor((Math.random() * messages.length) );
+            console.log( i);
+            document.getElementById('msg8').innerHTML = messages[i];
+        }
+        
+
+    </script>
+
+</head>
+
+<body>
+
+    <p>
+        <div id='msg8'>magic 8 ball</div><br><br><br>
+        <button onclick="newMessage8()"> Ask a question and push me </button>
+
+</body>
+
+</html>
