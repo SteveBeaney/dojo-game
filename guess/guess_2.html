@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <script>
+
+        var number = -1;
+
+        function init() {
+            number = Math.floor((Math.random() * 100.0));
+            document.getElementById('msg').innerHTML = "I've selected a number between 0 and 99 (inc) can you gues what it is?";
+        }
+
+        function processGuess(){
+            var num = document.getElementById('number').value;
+            if( num.length>0 && !isNaN(num)) {
+                var guess = Number(num);
+                if( guess == number ) {
+                    document.getElementById('msg').innerHTML = "Correct the number is " + number;
+                } else if( guess < number) {
+                    document.getElementById('msg').innerHTML = "Wrong the number is higher than " + guess;
+                } else {
+                    document.getElementById('msg').innerHTML = "Wrong the number is lower than " + guess;
+                }
+            } else {
+                document.getElementById('msg').innerHTML = "Please enter a number between 0 and 99 (inc)";
+            }
+
+
+        }
+
+    </script>
+
+</head>
+
+<body onload="init()">
+
+<p>
+<div id='msg'>message</div>
+<br><br><br>
+<input id="number" type="text"/>
+<br><br><br>
+<button onclick="processGuess()"> submit guess</button>
+<br><br><br>
+<button onclick="init()">reset</button>
+
+</body>
+
+</html>
